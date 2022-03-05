@@ -18,9 +18,12 @@ Hint: We need:
       /*  FUNC DESCRIPTION: Operator calculations. Create the in +, x, -, and ÷ operator calculations. The plus operator is done for you!
           Uncomment and fill in the blank spaces. */
       function calculations() {
+          console.log("OPERATOR",operator);
+          console.log("str buffer going into calc", strbuffer);
           const intBuffer = parseInt(strbuffer); // Hint: Use parseInt to convert string to integer
           if (operator === "+") {
-              console.log("before plus",typeof total);
+              console.log("before plus", total);
+              console.log("int buffer", intBuffer);
               total += intBuffer;
               console.log("plus",total);
    
@@ -45,7 +48,8 @@ Hint: We need:
           /*  If strbuffer is not 0, meaning there is a previous number typed in already, what should we display on the screen?
           Hint: How do we concatenate strings? If you are stuck, imagine typing in a "5" into the calculator, making strbuffer into "5". 
           Then imagine typing "3" into the calculator. Now "3" is value and strbuffer is still at "5", so strbuffer will now be 53.  */
-              strbuffer.concat(value);
+            console.log("concat ", strbuffer,value);  
+            strbuffer = strbuffer.concat(value);
           }
       }
 
@@ -64,14 +68,14 @@ Hint: We need:
             if (strbuffer.length == 1) {
                 strbuffer = "0";
             } else {
-                strbuffer.substring(0, strbuffer.length - 1);
+                strbuffer = strbuffer.substring(0, strbuffer.length - 1);
             }
           }
           else if (symbol === "="){
             if (operator !== "") {
                 calculations();
-                console.log(total);
                 strbuffer = total.toString();
+                operator = "";
             }
           }
           else { //make functionality if symbol is an operator
@@ -82,7 +86,8 @@ Hint: We need:
               calculations();
           }
           operator = symbol;
-          strbuffer =  "";
+          strbuffer =  "0";
+          console.log("setting str buffer to 0 ");
           }
       }
 
@@ -120,7 +125,13 @@ Hint: We need:
           console.log(res.innerText);   
          
           if (strbuffer !== "") {
-            res.innerText = strbuffer;
+            if (strbuffer === "0") {
+                console.log("the fk");
+                res.innerText = total.toString();
+            } else {
+                res.innerText = strbuffer;
+            }
+         
           } 
           
           console.log(res.innerText);
